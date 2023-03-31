@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyleLoginBtn = styled.p`
@@ -10,7 +11,9 @@ color:#F0DD22;
 
 const LoginBtn = () =>{
     return(
-        <StyleLoginBtn>LOGIN</StyleLoginBtn>
+        <Link to="/login">
+            <StyleLoginBtn>LOGIN</StyleLoginBtn>
+        </Link>
     )
 }
 
