@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const StyleJoinBtn = styled.p`
@@ -9,10 +10,12 @@ color:#F0DD22;
 
 `
 
-const JoinBtn = () =>{
+const HeaderJoinBtn = () =>{
     return(
+        <Link to="/join">
         <StyleJoinBtn>JOIN</StyleJoinBtn>
+        </Link>
     )
 }
 
-export default JoinBtn
+export default HeaderJoinBtn

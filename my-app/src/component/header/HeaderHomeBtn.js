@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyleHomeBtn = styled.p`
 font-family: 'Noto Serif KR', serif;
@@ -10,10 +11,12 @@ margin-left:40px;
 `
 
 
-const HomeBtn = () =>{
+const HeaderHomeBtn = () =>{//누르면 main으로 간다. 
     return (
+        <Link to="/">
         <StyleHomeBtn>Colorful World</StyleHomeBtn>
+        </Link>
     )
 }
 
-export default HomeBtn
+export default HeaderHomeBtn

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import HomeBtn from "./HomeBtn";
-import LoginBtn from "./LoginBtn";
-import JoinBtn from "./JoinBtn";
+import HomeBtn from "./HeaderHomeBtn";
+import LoginBtn from "./HeaderLoginBtn";
+import JoinBtn from "./HeaderJoinBtn";
 
 const StyleHeader = styled.header`
 width:100%;

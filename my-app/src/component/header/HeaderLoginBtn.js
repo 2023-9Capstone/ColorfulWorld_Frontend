@@ -9,7 +9,7 @@ font-weight:bold;
 color:#F0DD22;
 `
 
-const LoginBtn = () =>{
+const HeaderLoginBtn = () =>{
     return(
         <Link to="/login">
             <StyleLoginBtn>LOGIN</StyleLoginBtn>
@@ -17,4 +17,4 @@ const LoginBtn = () =>{
     )
 }
 
-export default LoginBtn
+export default HeaderLoginBtn
