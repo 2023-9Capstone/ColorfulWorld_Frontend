@@ -13,8 +13,10 @@ height:400px;
 
 
 const JoinForm = () =>{
-    const onSubmit = () =>{//회원가입 제출했을시 함수
-
+    const onSubmit = (event) =>{//회원가입 제출했을시 함수
+        event.preventDefault()
+        const [email,password,password2] = event.target;
+        console.log(email.value,password.value,password2.value)
     }
     return (
         <StyleLoginForm onSubmit={onSubmit}>

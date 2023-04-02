@@ -13,8 +13,10 @@ height:400px;
 
 
 const LoginForm = () =>{
-    const onSubmit = () =>{//로그인 제출했을시 함수
-
+    const onSubmit = (event) =>{//로그인 제출했을시 함수
+        event.preventDefault();
+        const [email,password] = event.target;
+        console.log(email.value,password.value)
     }
     return (
         <StyleLoginForm onSubmit={onSubmit}>
