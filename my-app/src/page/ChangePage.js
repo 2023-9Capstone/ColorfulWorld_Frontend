@@ -1,3 +1,4 @@
+
 import Header from "../component/header/Header";
 import ChangeCard from "../component/change/ChangeCard";
 import styled from "styled-components";
