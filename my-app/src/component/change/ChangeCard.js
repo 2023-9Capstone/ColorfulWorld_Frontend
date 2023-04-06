@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ImgBtn from "../commons/ImgBtn";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const StyleChangeCard = styled.main`
 width: 540px;
@@ -28,12 +28,14 @@ const ChangeCard = () =>{
     }
 
     const UploadImage = () =>{//Input이 바뀌면 실행 서버 통신 예상
-        const files = inputRef.current.files[0]
+        const files = inputRef.current.files[0];
+        console.lgo(files)
     }
 
     const DropImg = (event) =>{//이미지를 drop 후 실행 함수
         event.preventDefault();
         const files = event.dataTransfer.files[0];
+        console.lgo(files)
     }
 
     return (
