@@ -19,7 +19,9 @@ const StyleBtnContainer = styled.div`
 `;
 
 const MainPage = () => {
+  //FormBtn은 Component이기 때문에 onClick이 되지 않아서 props로 넘겼습니다!!
   const navigate = useNavigate();
+  //로그인 확인할 때 사용하면 사용자를 구분하면 좋을거 같아요!
   const gotochange = () => {
     navigate("/change");
   };
@@ -28,7 +30,7 @@ const MainPage = () => {
       <Header />
       <StyleMain>
         <IntroduceCard />
-        <FormBtn onClick={gotochange} value="IMAGE" />
+        <FormBtn ClickFun={gotochange} value="IMAGE" />
       </StyleMain>
     </>
   );

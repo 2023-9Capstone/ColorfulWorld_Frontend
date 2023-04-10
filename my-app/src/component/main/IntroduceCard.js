@@ -60,12 +60,12 @@ const IntroduceCard = () => {
     <>
       <StyleIntroduceCard>
         <StyleIntroduceTitle>Welcome!</StyleIntroduceTitle>
-        {btnState == 1 ? (
+        {btnState === 1 ? (
           <StyleImg src={Ishihara1}></StyleImg>
         ) : (
           <StyleImg src={Ishihara2}></StyleImg>
         )}
-        {btnState == 1 ? (
+        {btnState === 1 ? (
           <StyleCardText>
             색각이상자 분들에게 보다 다채로운 세상을 선물하겠습니다.
           </StyleCardText>
@@ -78,11 +78,11 @@ const IntroduceCard = () => {
         <StyleBtnContainer>
           <StyleSlideBtn
             onClick={() => setBtnState(1)}
-            className={btnState == 1 ? "active" : ""}
+            className={btnState === 1 ? "active" : ""}
           ></StyleSlideBtn>
           <StyleSlideBtn
             onClick={() => setBtnState(2)}
-            className={btnState == 2 ? "active" : ""}
+            className={btnState === 2 ? "active" : ""}
           ></StyleSlideBtn>
         </StyleBtnContainer>
       </StyleIntroduceCard>

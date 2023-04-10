@@ -14,9 +14,9 @@ font-family: 'Noto Sans KR', sans-serif;
 
 
 const FormBtn = (props) =>{
-    const {value} = props;
+    const {value,ClickFun} = props;
     return (
-        <StyleFormBtn>{value}</StyleFormBtn>
+        <StyleFormBtn onClick={ClickFun}>{value}</StyleFormBtn>
     )
 }
 
