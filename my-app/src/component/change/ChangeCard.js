@@ -35,26 +35,29 @@ const ChangeCard = () =>{
         const {type} = files;
         const slash = type.indexOf("/");
         const extension = type.slice(slash+1,type.length);
-        return ImgExtension.includes(extension)
+        return ImgExtension.includes(extension)//소문자 대문자 구별없이 하는걸로!
     }
-    const UploadImage = () =>{//Input이 바뀌면 실행 서버 통신 예상
-        const files = inputRef.current.files[0];
 
+    const UploadImg = () =>{//Input이 바뀌면 실행 서버 통신 예상
+        const files = inputRef.current.files[0];
         if(!CheckingImage(files)){
             window.alert("이미지 형식이 맞지 않습니다!")
             return;
         }
-        TransferImg(files)
+        //TransferImg(files)
     }
 
     const DropImg = (event) =>{//이미지를 drop 후 실행 함수 이미지 압축 필요
         event.preventDefault();
         const files = event.dataTransfer.files[0];
-        CheckingImage(files)
-        TransferImg(files)
+        if(!CheckingImage(files)){
+            window.alert("이미지 형식이 맞지 않습니다!")
+            return;
+        }
+        //TransferImg(files)
     }
 
-    const getFileFomrUrlImage = async (url) => {
+    const getFileFomrUrlImage = async (url) => {//이미지를 파일로 바꾸는 함수
         const res = await fetch(url);
         const data = await res.blob();
         const fileName = url.split('/').pop();
@@ -63,28 +66,18 @@ const ChangeCard = () =>{
         return new File([data], fileName, metaData);
     }
 
-    const FileToUrl = (file) =>{
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const imageSrc = event.target.result;
-          setImgUrl(imageSrc);
-        }
-        reader.readAsDataURL(file);
-    }
 
     const TransferImg = (files) =>{//서버에 이미지를 전달하는 함수
         let formData = new FormData();
         formData.append("image",files);
         formData.append('idx', 1);
-
         axios.post("http://172.16.97.206:5002/colorization", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
         .then(res=> res.data.url)
-        .then(url => getFileFomrUrlImage(BaseUrl+url).then(res=>res))
-        .then(url => FileToUrl(url))
+        .then(url => getFileFomrUrlImage(BaseUrl+url).then(res=>URL.createObjectURL(res)))
         .catch(err=>{
             console.log(err)
         })
@@ -97,9 +90,9 @@ const ChangeCard = () =>{
             onDragOver={(event)=>event.preventDefault()}>
             <StyleChagneHeder>여기에 이미지를 드롭해주세요!</StyleChagneHeder>
             <ImgBtn label="UPLOAD" clickfuc={ClickChangeBtn}/>
-            <img src={imgUrl} style={{width:"300px",height:"300px"}}></img>
+            {imgUrl&&<img src={imgUrl} style={{width:"300px",height:"300px"}}></img>}
             <StyledInput type="file" 
-                onChange={UploadImage} 
+                onChange={UploadImg} 
                 ref={inputRef} 
             />
         </StyleChangeCard>
