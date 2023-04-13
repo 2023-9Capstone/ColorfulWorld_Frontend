@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ImgBtn from "../commons/ImgBtn";
 import { useRef, useState } from "react";
+import ChangeScreen from "./ChangeScreen";
 import axios from "axios"
 
 
@@ -14,22 +15,27 @@ display:flex;
 flex-direction:column;
 justify-content:space-around;
 align-items:center;
+
 `
 const StyleChagneHeder = styled.p`
 font-family: 'Noto Serif KR', serif;
 font-size: 24px;
+margin-top:20px;
+margin-bottom:0px;
 `
 const StyledInput = styled.input`
     visibility: hidden;
 `
 
+
+
 const ChangeCard = () =>{
     const BaseUrl = "http://172.16.97.206:5002";
     const [imgUrl,setImgUrl] = useState("")
+    const [change,setChange] = useState(false)
     const inputRef = useRef();
     const ImgExtension = ["png","jpeg","jpg"];
-    //버튼 클릭시 Input실행함
-    const ClickChangeBtn = () =>inputRef.current.click();
+    const ClickChangeBtn = () =>inputRef.current.click(); //버튼 클릭시 Input실행함
 
     const CheckingImage = (files) =>{//파일 확장자 확인하기위한 함수
         const {type} = files;
@@ -40,20 +46,24 @@ const ChangeCard = () =>{
 
     const UploadImg = () =>{//Input이 바뀌면 실행 서버 통신 예상
         const files = inputRef.current.files[0];
+        if(!files) return
         if(!CheckingImage(files)){
             window.alert("이미지 형식이 맞지 않습니다!")
             return;
         }
+        setImgUrl(URL.createObjectURL(files))
         //TransferImg(files)
     }
 
     const DropImg = (event) =>{//이미지를 drop 후 실행 함수 이미지 압축 필요
         event.preventDefault();
+        setChange(false)
         const files = event.dataTransfer.files[0];
         if(!CheckingImage(files)){
             window.alert("이미지 형식이 맞지 않습니다!")
             return;
         }
+        setImgUrl(URL.createObjectURL(files))
         //TransferImg(files)
     }
 
@@ -77,25 +87,37 @@ const ChangeCard = () =>{
             }
         })
         .then(res=> res.data.url)
-        .then(url => getFileFomrUrlImage(BaseUrl+url).then(res=>URL.createObjectURL(res)))
+        .then(url => getFileFomrUrlImage(BaseUrl+url).then(res=>setImgUrl(URL.createObjectURL(res))))
         .catch(err=>{
             console.log(err)
         })
 
     }
-
-    return (
+    //DragOver은 drag가  
+    return (//test중이라 아직 img가 있어용
+        <>
         <StyleChangeCard
             onDrop={DropImg}
-            onDragOver={(event)=>event.preventDefault()}>
+            onDragOver={(event)=>{
+                event.preventDefault()
+                setChange(true)
+            }}
+            onDragLeave={(event)=>{
+                const relatedTarget = event.relatedTarget;
+                if(!event.currentTarget.contains(relatedTarget))
+                    setChange(false)
+            }}
+            >
+            {change&&<ChangeScreen />}
             <StyleChagneHeder>여기에 이미지를 드롭해주세요!</StyleChagneHeder>
+            {<img src={imgUrl} style={{width:"auto",height:"200px"}}></img>}
             <ImgBtn label="UPLOAD" clickfuc={ClickChangeBtn}/>
-            {imgUrl&&<img src={imgUrl} style={{width:"300px",height:"300px"}}></img>}
             <StyledInput type="file" 
                 onChange={UploadImg} 
                 ref={inputRef} 
             />
         </StyleChangeCard>
+        </>
     )
 }
 
