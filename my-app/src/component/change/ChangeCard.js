@@ -15,7 +15,7 @@ display:flex;
 flex-direction:column;
 justify-content:space-around;
 align-items:center;
-
+margin-bottom:50px;
 `
 const StyleChagneHeder = styled.p`
 font-family: 'Noto Serif KR', serif;
@@ -41,7 +41,7 @@ const ChangeCard = () =>{
         const {type} = files;
         const slash = type.indexOf("/");
         const extension = type.slice(slash+1,type.length);
-        return ImgExtension.includes(extension)//소문자 대문자 구별없이 하는걸로!
+        return ImgExtension.includes(extension.toLowerCase())//소문자 대문자 구별없이 하는걸로!
     }
 
     const UploadImg = () =>{//Input이 바뀌면 실행 서버 통신 예상
@@ -96,6 +96,7 @@ const ChangeCard = () =>{
     //DragOver은 drag가  
     return (//test중이라 아직 img가 있어용
         <>
+        
         <StyleChangeCard
             onDrop={DropImg}
             onDragOver={(event)=>{
@@ -103,14 +104,15 @@ const ChangeCard = () =>{
                 setChange(true)
             }}
             onDragLeave={(event)=>{
-                const relatedTarget = event.relatedTarget;
-                if(!event.currentTarget.contains(relatedTarget))
+                const {currentTarget,target} = event;
+                if(currentTarget!==target)
                     setChange(false)
             }}
+            onMouseOver={()=>setChange(false)}
             >
             {change&&<ChangeScreen />}
             <StyleChagneHeder>여기에 이미지를 드롭해주세요!</StyleChagneHeder>
-            {<img src={imgUrl} style={{width:"auto",height:"200px"}}></img>}
+            {imgUrl&&<img alt="사용자가 올린 이미지" src={imgUrl} style={{width:"auto",height:"200px"}}/>}
             <ImgBtn label="UPLOAD" clickfuc={ClickChangeBtn}/>
             <StyledInput type="file" 
                 onChange={UploadImg} 
