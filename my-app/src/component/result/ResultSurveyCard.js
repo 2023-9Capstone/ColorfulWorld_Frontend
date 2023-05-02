@@ -3,7 +3,7 @@ import OkBtn from "../commons/OkBtn";
 
 const StyledResultSurveyCard = styled.section`
   width: 400px;
-  height: 320px;
+  height: 140px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   background-color: #ffffff;
@@ -12,7 +12,7 @@ const StyledResultSurveyCard = styled.section`
   align-items: center;
   justify-content: center;
   margin-top: 100px;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 `;
 
 const StyledResultSurveyText = styled.div`
@@ -25,9 +25,8 @@ const StyledResultSurveyText = styled.div`
 `;
 
 const StyledResultSurveyBtn = styled.div`
-  margin-top: 20px;
-  width: 240;
-  height: 100px;
+  width: 60px;
+  height: 40px;
 `;
 
 const ResultSurveyCard = () => {
@@ -40,7 +39,6 @@ const ResultSurveyCard = () => {
       </StyledResultSurveyText>
       <StyledResultSurveyBtn>
         <OkBtn value={"만족"}></OkBtn>
-        <OkBtn value={"불만족"}></OkBtn>
       </StyledResultSurveyBtn>
     </StyledResultSurveyCard>
   );

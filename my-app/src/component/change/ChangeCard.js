@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ImgBtn from "../commons/ImgBtn";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
+import imageContext from "../context/imageContext";
 import ChangeScreen from "./ChangeScreen";
 import axios from "axios";
 
@@ -28,6 +29,7 @@ const StyledInput = styled.input`
 
 const ChangeCard = () => {
   const BaseUrl = "http://172.16.97.206:5002";
+  const { setImage } = useContext(imageContext);
   const [imgUrl, setImgUrl] = useState("");
   const [change, setChange] = useState(false);
   const inputRef = useRef();
@@ -41,30 +43,31 @@ const ChangeCard = () => {
     const extension = type.slice(slash + 1, type.length);
     return ImgExtension.includes(extension.toLowerCase()); //소문자 대문자 구별없이 하는걸로!
   };
-
   const UploadImg = () => {
     //Input이 바뀌면 실행 서버 통신 예상
     const files = inputRef.current.files[0];
     if (!files) return;
+    setImage("박규태");
     if (!CheckingImage(files)) {
       window.alert("이미지 형식이 맞지 않습니다!");
       return;
     }
     setImgUrl(URL.createObjectURL(files));
-    //TransferImg(files)
+    //TransferImg(files);
   };
 
   const DropImg = (event) => {
     //이미지를 drop 후 실행 함수 이미지 압축 필요
     event.preventDefault();
     setChange(false);
+    setImage("황현정");
     const files = event.dataTransfer.files[0];
     if (!CheckingImage(files)) {
       window.alert("이미지 형식이 맞지 않습니다!");
       return;
     }
     setImgUrl(URL.createObjectURL(files));
-    //TransferImg(files)
+    //TransferImg(files);
   };
 
   const getFileFomrUrlImage = async (url) => {
@@ -90,9 +93,9 @@ const ChangeCard = () => {
       })
       .then((res) => res.data.url)
       .then((url) =>
-        getFileFomrUrlImage(BaseUrl + url).then((res) =>
-          setImgUrl(URL.createObjectURL(res))
-        )
+        getFileFomrUrlImage(BaseUrl + url).then((res) => {
+          setImgUrl(() => URL.createObjectURL(res));
+        })
       )
       .catch((err) => {
         console.log(err);
@@ -100,7 +103,6 @@ const ChangeCard = () => {
   };
   //DragOver은 drag가
   return (
-    //test중이라 아직 img가 있어용
     <>
       <StyleChangeCard
         onDrop={DropImg}

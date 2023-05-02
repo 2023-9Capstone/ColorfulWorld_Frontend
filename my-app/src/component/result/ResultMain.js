@@ -1,4 +1,5 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useContext } from "react";
+import imageContext from "../context/imageContext";
 import styled from "styled-components";
 import ResultSurveyCard from "./ResultSurveyCard";
 import Ishihara1 from "../img/Ishihara_1.png";
@@ -20,28 +21,25 @@ const StyleResultImg = styled.img`
 const StyledSurvetAndBtn = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 200px;
 `;
 
 /*fallback html 처리*/
 const ResultMain = () => {
-  const clickDonwload = () => {
-    const text = "download";
-    console.log(text);
-  };
+  const { image, setImage } = useContext(imageContext);
+  console.log(image);
   return (
-    <ErrorBoundary fallback={<div>asd</div>}>
-      <Suspense fallback={<div>asd</div>}>
+    <Suspense fallback={<div>asddddd</div>}>
+      <ErrorBoundary fallback={<div>asd</div>}>
         <StyleContainer>
           <StyleResultImg src={Ishihara1}></StyleResultImg>
           <StyleResultImg src={Ishihara2}></StyleResultImg>
         </StyleContainer>
         <StyledSurvetAndBtn>
           <ResultSurveyCard />
-          <ImgBtn label="DOWNLOAD" clickfuc={clickDonwload} />
+          <ImgBtn label="DOWNLOAD" />
         </StyledSurvetAndBtn>
-      </Suspense>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Suspense>
   );
 };
 

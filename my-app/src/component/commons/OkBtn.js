@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 const StyleOkBtn = styled.button`
-  width: 80px;
-  height: 60px;
+  width: 60px;
+  height: 40px;
   background-color: #ebd500;
   color: #ffffff;
   border-radius: 10px;
   border: none;
   font-size: 16px;
+  margin-top: 10px;
   font-family: "Noto Serif KR", serif;
-  margin: 20px;
   :hover {
     cursor: pointer;
   }
