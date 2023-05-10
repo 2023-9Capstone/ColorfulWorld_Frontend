@@ -16,8 +16,8 @@ const StyleOkBtn = styled.button`
 `;
 
 const OkBtn = (props) => {
-  const { value } = props;
-  return <StyleOkBtn>{value}</StyleOkBtn>;
+  const { value, onClick } = props;
+  return <StyleOkBtn onClick={onClick}>{value}</StyleOkBtn>;
 };
 
 export default OkBtn;

@@ -12,13 +12,14 @@ const StyledSurvetAndBtn = styled.div`
 
 /*fallback html 처리*/
 const ResultMain = () => {
+  const imageDownload = () => {};
   return (
     <ErrorBoundary fallback={<div>Loading...</div>}>
       <Suspense fallback={<div>Loading...</div>}>
         <ResultContainer />
         <StyledSurvetAndBtn>
           <ResultSurveyCard />
-          <ImgBtn label="DOWNLOAD" />
+          <ImgBtn label="DOWNLOAD" onClick={imageDownload} />
         </StyledSurvetAndBtn>
       </Suspense>
     </ErrorBoundary>
