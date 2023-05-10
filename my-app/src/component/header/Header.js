@@ -2,6 +2,9 @@ import styled from "styled-components";
 import HomeBtn from "./HeaderHomeBtn";
 import LoginBtn from "./HeaderLoginBtn";
 import JoinBtn from "./HeaderJoinBtn";
+import LogoutBtn from "./HeaderLogoutBtn";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const StyleHeader = styled.header`
   width: 100%;
@@ -21,13 +24,26 @@ const StyleHeader = styled.header`
 `;
 
 const Header = () => {
+  let [isLogin, setIsLogin] = useState();
+
+  useEffect(() => {
+    setIsLogin(localStorage.getItem("loginState"));
+    console.log(isLogin);
+  }, [isLogin]);
+
   return (
     <StyleHeader>
       <HomeBtn />
-      <nav className="LoginJoin">
-        <LoginBtn />
-        <JoinBtn />
-      </nav>
+      <div className="LoginJoin">
+        {isLogin === null ? (
+          <>
+            <LoginBtn />
+            <JoinBtn />
+          </>
+        ) : (
+          <LogoutBtn />
+        )}
+      </div>
     </StyleHeader>
   );
 };
