@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ImgBtn from "../commons/ImgBtn";
 import { useRef, useState } from "react";
-import { ChangeCheck } from "./changeFun/ChangeCheck";
+import { ChangeCheck } from "../../utils/ChangeCheck";
 import ChangeScreen from "./ChangeScreen";
 
 const StyleChangeCard = styled.main`

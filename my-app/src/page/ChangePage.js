@@ -3,7 +3,6 @@ import Header from "../component/header/Header";
 import ChangeCard from "../component/change/ChangeCard";
 import styled from "styled-components";
 import ImgBtn from "../component/commons/ImgBtn";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 const StyleChange = styled.div`
@@ -16,15 +15,11 @@ const StyleChange = styled.div`
 
 const ChangePage = () => {
   const [imageUrl, setImageUrl] = useState();
-  const getImageUrl = (image) => {
-    setImageUrl(() => image);
-  };
-
   return (
     <>
       <Header />
       <StyleChange>
-        <ChangeCard getImageUrl={getImageUrl} />
+        <ChangeCard getImageUrl={setImageUrl} />
         <Link to={`/result/${imageUrl}`}>
           <ImgBtn label="RESULT" />
         </Link>

@@ -28,7 +28,6 @@ const Header = () => {
 
   useEffect(() => {
     setIsLogin(localStorage.getItem("loginState"));
-    console.log(isLogin);
   }, [isLogin]);
 
   return (
