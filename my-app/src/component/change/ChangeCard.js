@@ -31,7 +31,6 @@ const ChangeCard = ({ getImageUrl }) => {
   const [change, setChange] = useState(false);
   const inputRef = useRef();
   const ClickChangeBtn = () => inputRef.current.click(); //버튼 클릭시 Input실행함
-
   const UploadImg = () => {
     //Input이 바뀌면 실행 서버 통신 예상
     const files = inputRef.current.files[0];

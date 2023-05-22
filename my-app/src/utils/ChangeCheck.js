@@ -13,14 +13,14 @@ export const ChangeCheck = (files, setImgUrl, getImageUrl) => {
     window.alert("이미지 형식이 맞지 않습니다!");
     return false;
   }
-  reader.readAsDataURL(files);
+  /*reader.readAsDataURL(files);
   reader.onload = (r) => {
     console.log(r.target.result);
     getImageUrl(r.target.result);
-  };
+  };*/
   const url = URL.createObjectURL(files);
   setImgUrl(url);
-  //let last = url?.substring(url?.lastIndexOf("/") + 1, url?.length);
-  //getImageUrl(() => last);
+  let last = url?.substring(url?.lastIndexOf("/") + 1, url?.length);
+  getImageUrl(() => last);
   return true;
 };

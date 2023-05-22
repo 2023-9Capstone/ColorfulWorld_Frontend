@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useState } from "react";
 import styled from "styled-components";
+import ImageChange from "../../utils/ImageChange";
 import ErrorBoundary from "../../error/ErrorBoundary";
 const ImgBtn = lazy(() => import("../commons/ImgBtn"));
 const ResultImgContainer = lazy(() => import("./ResultImgContainer"));
@@ -17,7 +18,7 @@ const ResultMain = () => {
   return (
     <ErrorBoundary fallback={<div>Loading...</div>}>
       <Suspense fallback={<div>Loading...</div>}>
-        <ResultImgContainer setImage={setImage} />
+        <ResultImgContainer Resource={ImageChange()} />
         <StyledSurvetAndBtn>
           <ResultSurveyCard />
           <ImgBtn label="DOWNLOAD" onClick={imageDownload} />

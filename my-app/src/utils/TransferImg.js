@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//Intensity
 export const TransferImg = async (images) => {
   //서버에 이미지를 전달하는 함수
   const formData = new FormData();

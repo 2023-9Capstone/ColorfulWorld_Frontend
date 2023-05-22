@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ImageChange from "../../utils/ImageChange";
 import { fetchUrl } from "../../utils/SubmitUrl";
+import { BaseUrl } from "../../utils/ImageChange";
 
 const StyleImg = styled.img`
   width: 320px;
@@ -9,14 +10,15 @@ const StyleImg = styled.img`
   margin-right: 80px;
 `;
 
-const resource = ImageChange();
+//const resource = ImageChange();
 
-const ResultContainer = ({ setImage }) => {
-  const image = resource.image.read();
+const ResultContainer = ({ Resource }) => {
+  const image = Resource.image.read();
+  console.log(image);
   return (
     <>
       <StyleImg src={fetchUrl()} alt="test" />
-      <StyleImg src={image} alt="test" />
+      <StyleImg src={BaseUrl + image} alt="test" />
     </>
   );
 };

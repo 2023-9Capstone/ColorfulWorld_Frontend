@@ -8,6 +8,7 @@ export const BaseUrl = "http://54.180.159.100:5100";
 
 const ImageChange = () => {
   const url = fetchUrl();
+  console.log(url);
   const userPromise = GetImgUrlToFile(url).then((res) =>
     TransferImg(res).then((new_url) => new_url)
   );

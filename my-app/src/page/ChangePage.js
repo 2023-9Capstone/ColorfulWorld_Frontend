@@ -3,7 +3,7 @@ import Header from "../component/header/Header";
 import ChangeCard from "../component/change/ChangeCard";
 import styled from "styled-components";
 import ImgBtn from "../component/commons/ImgBtn";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const StyleChange = styled.div`
   height: 800px;
@@ -14,15 +14,18 @@ const StyleChange = styled.div`
 `;
 
 const ChangePage = () => {
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("");
+  const navigate = useNavigate();
+  const goToResultAndImgAsync = () => {
+    //RESULT 버튼 클릭시 PROMISE 비동기.
+    navigate(`/result/${imageUrl}`);
+  };
   return (
     <>
       <Header />
       <StyleChange>
         <ChangeCard getImageUrl={setImageUrl} />
-        <Link to={`/result/${imageUrl}`}>
-          <ImgBtn label="RESULT" />
-        </Link>
+        <ImgBtn label="RESULT" clickfuc={goToResultAndImgAsync} />
       </StyleChange>
     </>
   );
