@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../component/header/Header";
 import ChangeCard from "../component/change/ChangeCard";
 import styled from "styled-components";
@@ -24,6 +24,7 @@ const ChangePage = () => {
     }
     navigate(`/result/${imageUrl}`);
   };
+
   return (
     <>
       <Header />

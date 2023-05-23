@@ -27,7 +27,7 @@ const ResultMain = () => {
         <ResultImgContainer Resource={ImageChange()} setImage={setImage} />
         <StyledSurvetAndBtn>
           <ResultSurveyCard />
-          <ImgBtn label="DOWNLOAD" clickfuc={imageDownload} />
+          <ImgBtn label="DOWNLOAD" onClick={imageDownload} />
         </StyledSurvetAndBtn>
       </Suspense>
     </ErrorBoundary>

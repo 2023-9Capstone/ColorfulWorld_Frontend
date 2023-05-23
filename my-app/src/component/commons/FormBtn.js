@@ -12,6 +12,8 @@ const StyleFormBtn = styled.button`
   :hover {
     cursor: pointer;
   }
+  margin: 5px;
+  padding: 10px;
 `;
 
 const FormBtn = (props) => {

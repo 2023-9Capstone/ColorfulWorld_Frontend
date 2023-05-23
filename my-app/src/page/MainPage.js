@@ -22,12 +22,10 @@ const StyleBtnContainer = styled.div`
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState();
-
+  const isLogin = localStorage.getItem("loginState");
   //페이지 렌더링 시에 로그인이 안 되어 있을 경우 로그인 페이지로 이동
   // useEffect(() => {
-  //   setIsLogin(localStorage.getItem("loginState"));
-  //   if (isLogin === null) navigate("/login");
+  //   if (!isLogin) navigate("/login");
   // }, [isLogin]);
 
   const gotochange = () => {
