@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import ImageChange from "../../utils/ImageChange";
 import { fetchUrl } from "../../utils/SubmitUrl";
-import { BaseUrl } from "../../utils/ImageChange";
+import { BaseUrl } from "../../utils/SubmitUrl";
 
 const StyleImg = styled.img`
   width: 320px;
@@ -12,9 +11,11 @@ const StyleImg = styled.img`
 
 //const resource = ImageChange();
 
-const ResultContainer = ({ Resource }) => {
+const ResultImgContainer = ({ Resource, setImage }) => {
   const image = Resource.image.read();
-  console.log(image);
+  useEffect(() => {
+    setImage(image);
+  }, [image]);
   return (
     <>
       <StyleImg src={fetchUrl()} alt="test" />
@@ -23,4 +24,4 @@ const ResultContainer = ({ Resource }) => {
   );
 };
 
-export default ResultContainer;
+export default ResultImgContainer;

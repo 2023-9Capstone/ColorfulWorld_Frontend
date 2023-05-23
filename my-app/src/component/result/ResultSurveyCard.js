@@ -1,8 +1,5 @@
 import styled from "styled-components";
 import OkBtn from "../commons/OkBtn";
-import axios from "axios";
-import { GetImgUrlToFile } from "../../utils/GetImgUrlToFile";
-import { BaseUrl } from "../../utils/ImageChange";
 
 const StyledResultSurveyCard = styled.section`
   width: 400px;

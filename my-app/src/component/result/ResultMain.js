@@ -1,7 +1,8 @@
 import React, { Suspense, lazy, useState } from "react";
 import styled from "styled-components";
-import ImageChange from "../../utils/ImageChange";
+import ImageChange from "../../utils/async/ImageChange";
 import ErrorBoundary from "../../error/ErrorBoundary";
+import { BaseUrl } from "../../utils/SubmitUrl";
 const ImgBtn = lazy(() => import("../commons/ImgBtn"));
 const ResultImgContainer = lazy(() => import("./ResultImgContainer"));
 const ResultSurveyCard = lazy(() => import("./ResultSurveyCard"));
@@ -13,15 +14,20 @@ const StyledSurvetAndBtn = styled.div`
 
 /*fallback html 처리*/
 const ResultMain = () => {
-  const [image, setImage] = useState();
-  const imageDownload = () => {};
+  const [image, setImage] = useState("");
+  const imageDownload = () => {
+    const link = document.createElement("a");
+    link.href = BaseUrl + image;
+    link.download = "image.jpg";
+    link.click();
+  };
   return (
     <ErrorBoundary fallback={<div>Loading...</div>}>
       <Suspense fallback={<div>Loading...</div>}>
-        <ResultImgContainer Resource={ImageChange()} />
+        <ResultImgContainer Resource={ImageChange()} setImage={setImage} />
         <StyledSurvetAndBtn>
           <ResultSurveyCard />
-          <ImgBtn label="DOWNLOAD" onClick={imageDownload} />
+          <ImgBtn label="DOWNLOAD" clickfuc={imageDownload} />
         </StyledSurvetAndBtn>
       </Suspense>
     </ErrorBoundary>
