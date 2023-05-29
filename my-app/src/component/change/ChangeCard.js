@@ -1,6 +1,7 @@
+import { useRef, useState, useContext } from "react";
+import { ImageContext } from "../../App";
 import styled from "styled-components";
 import ImgBtn from "../commons/ImgBtn";
-import { useRef, useState } from "react";
 import { ChangeCheck } from "../../utils/change/ChangeCheck";
 import ChangeScreen from "./ChangeScreen";
 
@@ -26,7 +27,8 @@ const StyledInput = styled.input`
   visibility: hidden;
 `;
 //함수를 나눠야한다.
-const ChangeCard = ({ getImageUrl }) => {
+const ChangeCard = () => {
+  const { setImage } = useContext(ImageContext);
   const [imgUrl, setImgUrl] = useState("");
   const [change, setChange] = useState(false);
   const inputRef = useRef();
@@ -35,7 +37,8 @@ const ChangeCard = ({ getImageUrl }) => {
     //Input이 바뀌면 실행 서버 통신 예상
     const files = inputRef.current.files[0];
     if (!files) return;
-    ChangeCheck(files, setImgUrl, getImageUrl);
+    setImage(()=>files);
+    ChangeCheck(files, setImgUrl);
   };
 
   const DropImg = (event) => {
@@ -43,7 +46,8 @@ const ChangeCard = ({ getImageUrl }) => {
     event.preventDefault();
     setChange(false);
     const files = event.dataTransfer.files[0];
-    ChangeCheck(files, setImgUrl, getImageUrl);
+    setImage(()=>files);
+    ChangeCheck(files, setImgUrl);
   };
 
   //DragOver은 drag가

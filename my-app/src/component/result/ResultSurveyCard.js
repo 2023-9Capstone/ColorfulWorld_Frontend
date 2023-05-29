@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import OkBtn from "../commons/OkBtn";
 import axios from "axios";
-import { BaseUrl, getFileFomrUrlImage } from "./ImageChange";
+import { GetImgUrlToFile } from "../../utils/async/GetImgUrlToFile";
+import { BaseUrl } from "../../utils/SubmitUrl";
 
 const StyledResultSurveyCard = styled.section`
   width: 400px;
@@ -35,7 +36,7 @@ const StyledResultSurveyBtn = styled.div`
 
 const ResultSurveyCard = () => {
   const imageSatisfied = () => {
-    getFileFomrUrlImage(BaseUrl + "/static/images/image.png").then((res) => {
+    GetImgUrlToFile(BaseUrl + "/static/images/image.png").then((res) => {
       const formData = new FormData();
       formData.append("image", res);
       axios.post("http://222.109.175.50:9876/image", formData, {

@@ -1,10 +1,7 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { lazy } from "react";
 import styled from "styled-components";
-import ImageChange from "../../utils/async/ImageChange";
-import ErrorBoundary from "../../error/ErrorBoundary";
 import { BaseUrl } from "../../utils/SubmitUrl";
 const ImgBtn = lazy(() => import("../commons/ImgBtn"));
-const ResultImgContainer = lazy(() => import("./ResultImgContainer"));
 const ResultSurveyCard = lazy(() => import("./ResultSurveyCard"));
 
 const StyledSurvetAndBtn = styled.div`
@@ -12,25 +9,29 @@ const StyledSurvetAndBtn = styled.div`
   flex-direction: column;
 `;
 
+const StyleImg = styled.img`
+  width: 320px;
+  height: auto;
+  margin-right: 80px;
+`;
+
 /*fallback html 처리*/
-const ResultMain = () => {
-  const [image, setImage] = useState("");
+const ResultMain = ({ Resource }) => {
+  const imageUrl = Resource.image.read();
   const imageDownload = () => {
-    const link = document.createElement("a");
-    link.href = BaseUrl + image;
-    link.download = "image.jpg";
+    let link = document.createElement("a");
+    link.href = URL.createObjectURL(imageUrl);
+    link.download = imageUrl.name;
     link.click();
   };
   return (
-    <ErrorBoundary fallback={<div>Loading...</div>}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ResultImgContainer Resource={ImageChange()} setImage={setImage} />
-        <StyledSurvetAndBtn>
-          <ResultSurveyCard />
-          <ImgBtn label="DOWNLOAD" onClick={imageDownload} />
-        </StyledSurvetAndBtn>
-      </Suspense>
-    </ErrorBoundary>
+    <>
+      <StyleImg src={URL.createObjectURL(imageUrl)} alt="transfer" />
+      <StyledSurvetAndBtn>
+        <ResultSurveyCard />
+        <ImgBtn label="DOWNLOAD" clickfuc={imageDownload} />
+      </StyledSurvetAndBtn>
+    </>
   );
 };
 

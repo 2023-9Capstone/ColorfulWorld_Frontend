@@ -1,12 +1,11 @@
 import { TransferImg } from "./TransferImg";
-import { GetImgUrlToFile } from "./GetImgUrlToFile";
 import { wrapPromise } from "./WrapPromise";
-import { fetchUrl } from "../SubmitUrl";
+import { GetImgUrlToFile } from "./GetImgUrlToFile";
+import { BaseUrl } from "../SubmitUrl";
 
-const ImageChange = () => {
-  const url = fetchUrl();
-  const userPromise = GetImgUrlToFile(url).then((res) =>
-    TransferImg(res).then((new_url) => new_url)
+const ImageChange = (image) => {
+  const userPromise = TransferImg(image).then((new_url) =>
+    GetImgUrlToFile(BaseUrl + new_url.url).then((file) => file)
   );
   return {
     image: wrapPromise(userPromise),

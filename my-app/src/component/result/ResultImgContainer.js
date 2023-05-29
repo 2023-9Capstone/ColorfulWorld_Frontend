@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import { fetchUrl } from "../../utils/SubmitUrl";
 import { BaseUrl } from "../../utils/SubmitUrl";
 
 const StyleImg = styled.img`
@@ -8,18 +7,13 @@ const StyleImg = styled.img`
   height: auto;
   margin-right: 80px;
 `;
+//<StyleImg src={BaseUrl + imageURL[0]} alt="test" />
+const ResultImgContainer = ({ flag, Resource }) => {
+  const image = Resource.image?.read();
 
-//const resource = ImageChange();
-
-const ResultImgContainer = ({ Resource, setImage }) => {
-  const image = Resource.image.read();
-  useEffect(() => {
-    setImage(image);
-  }, [image]);
   return (
     <>
-      <StyleImg src={fetchUrl()} alt="test" />
-      <StyleImg src={BaseUrl + image} alt="test" />
+      <StyleImg src={BaseUrl + image.url} alt="transfer" />
     </>
   );
 };

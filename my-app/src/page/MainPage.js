@@ -27,7 +27,6 @@ const MainPage = () => {
   // useEffect(() => {
   //   if (!isLogin) navigate("/login");
   // }, [isLogin]);
-
   const gotochange = () => {
     navigate("/change");
   };
